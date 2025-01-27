@@ -33,10 +33,14 @@ export default function ProductDetails() {
     function handleupdateCart() {
         if (!item || quantity > item.quantity) {
             const updatedQuantity = item ? quantity - item.quantity : quantity;
-            dispatch(addBasketItemAsync({ productId: product?.id!, quantity: updatedQuantity }))
+            if (product?.id) {
+                dispatch(addBasketItemAsync({ productId: product.id, quantity: updatedQuantity }));
+            }
         } else {
             const updatedQuantity = item.quantity - quantity;
-            dispatch(removeBasketItemAsync({ productId: product?.id!, quantity: updatedQuantity }))
+            if (product?.id) {
+                dispatch(removeBasketItemAsync({ productId: product.id, quantity: updatedQuantity }));
+            }
         }
     }
 
